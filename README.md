@@ -1,5 +1,7 @@
 # weather application with django and beautifulsoup
 
+# web scraping project 
+
 steps to run the application 
 
 1- download the code of this project
