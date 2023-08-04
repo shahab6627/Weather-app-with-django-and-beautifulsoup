@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Get Weather Updates!</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <h1>Get weather updates of your location</h1>
+            <div class="card">
+                <h5 class="card-header">Weather App</h5>
+                <div class="card-body">
+                  <form action="" method="post">
+                    {% csrf_token %}
+                  <div><span>location name</span></div>
+                  <div><input type="text" value="{{response.location}}" name="location" class="form-control"></div>
+                  <button type="submit" class="btn btn-primary mt-2">submit</button>
+                </form>
+                </div>
+              </div>
+              {% if response.invalid_location %}
+              <h3 class="text-danger">Invalid location </h3>
+             
+              {% elif response %}
+              <div class="mt-3"><h4>Weather Result for {{response.location}}</h4>
+                <p>{{response.day_and_time}}</p>
+                 
+                <h6>Weather Type:</h6> <h6 class="text-primary"> {{response.condition}} </h6>
+                </div>
+              <ol class="list-group list-group-numbered mt-2">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">Temperature</div>
+                  
+                  </div>
+                  <span class="badge bg-primary rounded-pill">{{response.temperature}} °C</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">Precipitation</div>
+                    
+                  </div>
+                  <span class="badge bg-primary rounded-pill">{{response.precipitation}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    <div class="fw-bold">Humidity</div>
+                    
+                  </div>
+                  <span class="badge bg-primary rounded-pill">{{response.humidity}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                      <div class="fw-bold">Wind speed</div>
+                      
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{response.wind_speed}} km/h</span>
+                  </li>
+              </ol>
+            {%endif%}
+        </div>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+   
+  </body>
+</html>
